@@ -64,8 +64,8 @@ export default function SideNavbar({ className }: SideNavbarProps) {
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
-        <div className="p-6">
-          <h2 className="text-2xl font-bold text-[#59159d] mb-8">IINR Menu</h2>
+        <div className="p-6 pt-16">
+          <h2 className="text-2xl font-bold text-[#59159d] mb-6">IINR Menu</h2>
           <nav className="space-y-4">
             {/* Our Services Dropdown */}
             <div className="space-y-2">
