@@ -171,7 +171,7 @@ export default function HomePage() {
 
       {/* Systems Section */}
       <div className="py-24 bg-white">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-6 md:px-8">
           <div className="text-center mb-16">
             <Badge className="mb-4 bg-purple-100 text-[#59159d] hover:bg-purple-200 transition-all duration-300 px-4 py-1.5 text-sm font-medium rounded-full">
               Our Solutions
@@ -185,28 +185,28 @@ export default function HomePage() {
           </div>
 
           {/* Tabs for system selection */}
-          <Tabs defaultValue="lms" className="w-full max-w-5xl mx-auto">
-            <TabsList className="grid w-full grid-cols-3 mb-12 bg-purple-50">
+          <Tabs defaultValue="lms" className="w-full max-w-3xl mx-auto">
+            <TabsList className="grid w-full grid-cols-3 mb-12 bg-purple-50 px-4 rounded-lg overflow-hidden">
               <TabsTrigger 
                 value="lms" 
-                className="data-[state=active]:bg-white data-[state=active]:text-[#59159d] data-[state=active]:shadow-sm py-3 flex items-center justify-center gap-2"
+                className="data-[state=active]:bg-white data-[state=active]:text-[#59159d] data-[state=active]:shadow-sm py-3 flex items-center justify-center gap-1 px-1 sm:px-2 text-sm sm:text-base overflow-hidden"
               >
-                <BookOpen size={18} />
-                Learning
+                <BookOpen size={16} className="flex-shrink-0" />
+                <span className="truncate">Learning</span>
               </TabsTrigger>
               <TabsTrigger 
                 value="security" 
-                className="data-[state=active]:bg-white data-[state=active]:text-[#59159d] data-[state=active]:shadow-sm py-3 flex items-center justify-center gap-2"
+                className="data-[state=active]:bg-white data-[state=active]:text-[#59159d] data-[state=active]:shadow-sm py-3 flex items-center justify-center gap-1 px-1 sm:px-2 text-sm sm:text-base overflow-hidden"
               >
-                <Shield size={18} />
-                Security
+                <Shield size={16} className="flex-shrink-0" />
+                <span className="truncate">Security</span>
               </TabsTrigger>
               <TabsTrigger 
                 value="accounts" 
-                className="data-[state=active]:bg-white data-[state=active]:text-[#59159d] data-[state=active]:shadow-sm py-3 flex items-center justify-center gap-2"
+                className="data-[state=active]:bg-white data-[state=active]:text-[#59159d] data-[state=active]:shadow-sm py-3 flex items-center justify-center gap-1 px-1 sm:px-2 text-sm sm:text-base overflow-hidden"
               >
-                <CreditCard size={18} />
-                Accounts
+                <CreditCard size={16} className="flex-shrink-0" />
+                <span className="truncate">Accounts</span>
               </TabsTrigger>
             </TabsList>
             
