@@ -232,6 +232,10 @@ export default function BillSubmissionForm({ onSubmit, serialNumber }: BillSubmi
             <SelectContent>
               <SelectItem value="IINR">IINR</SelectItem>
               <SelectItem value="KGH">KGH</SelectItem>
+              <SelectItem value="ICH">ICH</SelectItem>
+              <SelectItem value="CCNR">CCNR</SelectItem>
+              <SelectItem value="IIHMAHS">IIHMAHS</SelectItem>
+              <SelectItem value="IIPSR">IIPSR</SelectItem>
             </SelectContent>
           </Select>
         </div>

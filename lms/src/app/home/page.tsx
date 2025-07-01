@@ -220,7 +220,7 @@ export default function HomePage() {
                   <h3 className="text-3xl font-bold text-[#59159d]">Learning Management System</h3>
                 </div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 auto-rows-fr min-h-[350px]">
                   <EnhancedFeatureCard
                     title="Course Management"
                     description="Easily create, update, and manage courses with detailed information and resources."
@@ -257,7 +257,7 @@ export default function HomePage() {
                   <h3 className="text-3xl font-bold text-[#59159d]">Security Management System</h3>
                 </div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 auto-rows-fr min-h-[350px]">
                   <EnhancedFeatureCard
                     title="Access Control"
                     description="Manage and monitor access to campus facilities with advanced security protocols."
@@ -294,7 +294,7 @@ export default function HomePage() {
                   <h3 className="text-3xl font-bold text-[#59159d]">Accounts Management System</h3>
                 </div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 auto-rows-fr min-h-[350px]">
                   <EnhancedFeatureCard
                     title="Fee Management"
                     description="Process and track student fees with automated billing and payment tracking."
@@ -414,10 +414,10 @@ export default function HomePage() {
 // Enhanced Feature Card Component with modern design
 function EnhancedFeatureCard({ title, description, icon }: { title: string; description: string; icon: React.ReactNode }) {
   return (
-    <Card className="hover:shadow-xl transition-all duration-300 border border-purple-100 hover:border-purple-200 overflow-hidden group">
-      <CardContent className="p-6 relative">
+    <Card className="hover:shadow-xl transition-all duration-300 border border-purple-100 hover:border-purple-200 overflow-visible group h-full">
+      <CardContent className="p-6 relative h-full flex flex-col">
         <div className="absolute top-0 right-0 w-24 h-24 bg-purple-50 rounded-full -m-12 opacity-50 group-hover:scale-150 transition-all duration-500"></div>
-        <div className="relative z-10">
+        <div className="relative z-10 flex flex-col h-full">
           <div className="bg-purple-50 p-3 rounded-full w-12 h-12 flex items-center justify-center mb-4 group-hover:bg-purple-100 transition-colors duration-300">
             {icon}
           </div>
