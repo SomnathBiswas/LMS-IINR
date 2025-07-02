@@ -14,7 +14,15 @@ export default function SecurityDashboard() {
   const [securityId, setSecurityId] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [bills, setBills] = useState<BillData[]>([]);
-  const [nextSerialNumber, setNextSerialNumber] = useState(1);
+  // Initialize with 1, but will be updated after fetching bills
+  const [nextSerialNumber, setNextSerialNumber] = useState(() => {
+    // Try to get the serial number from localStorage first
+    if (typeof window !== 'undefined') {
+      const savedSerialNumber = localStorage.getItem('nextBillSerialNumber');
+      return savedSerialNumber ? parseInt(savedSerialNumber, 10) : 1;
+    }
+    return 1;
+  });
 
   useEffect(() => {
     // Check if user is authenticated as Security
@@ -35,8 +43,12 @@ export default function SecurityDashboard() {
                 const fetchedBills = await response.json();
                 setBills(fetchedBills);
                 if (fetchedBills.length > 0) {
+                  // Find the highest serial number in the existing bills
                   const maxSerialNumber = Math.max(...fetchedBills.map((bill: BillData) => bill.serialNumber));
-                  setNextSerialNumber(maxSerialNumber + 1);
+                  // Set the next serial number to be one higher than the max
+                  const newSerialNumber = maxSerialNumber + 1;
+                  setNextSerialNumber(newSerialNumber);
+                  localStorage.setItem('nextBillSerialNumber', newSerialNumber.toString());
                 }
               }
             } catch (error) {
@@ -73,7 +85,11 @@ export default function SecurityDashboard() {
   
   const handleBillSubmit = (billData: BillData) => {
     setBills(prevBills => [...prevBills, billData]);
-    setNextSerialNumber(prevSerialNumber => prevSerialNumber + 1);
+    setNextSerialNumber(prevSerialNumber => {
+      const newSerialNumber = prevSerialNumber + 1;
+      localStorage.setItem('nextBillSerialNumber', newSerialNumber.toString());
+      return newSerialNumber;
+    });
   };
 
   if (isLoading) {
@@ -110,6 +126,8 @@ export default function SecurityDashboard() {
                 <CardDescription>Upload bills and fill in the required details</CardDescription>
               </CardHeader>
               <CardContent>
+                {/* Pass the next available serial number to the form */}
+                {/* Display the next available serial number in the form */}
                 <BillSubmissionForm onSubmit={handleBillSubmit} serialNumber={nextSerialNumber} />
               </CardContent>
             </Card>

@@ -11,7 +11,7 @@ import { format } from 'date-fns';
 
 interface BillSubmissionFormProps {
   onSubmit: (billData: BillData) => void;
-  serialNumber: number;
+  serialNumber: number; // This is the next available serial number
 }
 
 export interface BillData {
@@ -26,8 +26,10 @@ export interface BillData {
 }
 
 export default function BillSubmissionForm({ onSubmit, serialNumber }: BillSubmissionFormProps) {
+  // serialNumber is the next available serial number
+  
   const [billData, setBillData] = useState<BillData>({
-    serialNumber,
+    serialNumber, // Store the serial number for submission
     billImage: null,
     ownerName: '',
     submittedInstitute: 'IINR',
@@ -146,7 +148,7 @@ export default function BillSubmissionForm({ onSubmit, serialNumber }: BillSubmi
           <Label htmlFor="serialNumber">Serial Number</Label>
           <Input 
             id="serialNumber" 
-            value={billData.serialNumber} 
+            value={serialNumber} 
             disabled 
             className="bg-gray-100"
           />
