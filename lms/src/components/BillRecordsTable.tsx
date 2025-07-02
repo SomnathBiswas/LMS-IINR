@@ -175,8 +175,8 @@ export default function BillRecordsTable({ bills }: BillRecordsTableProps) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {bills.map((bill) => (
-            <TableRow key={bill.serialNumber}>
+          {bills.map((bill, index) => (
+            <TableRow key={`bill-${bill.serialNumber}-${index}`}>
               <TableCell>{bill.serialNumber}</TableCell>
               <TableCell>
                 <Dialog>
