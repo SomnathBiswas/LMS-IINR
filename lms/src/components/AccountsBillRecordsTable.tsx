@@ -1,8 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { format } from 'date-fns';
 import { Eye, Check, X, Download, FileSpreadsheet } from 'lucide-react';
 import { BillData } from './BillSubmissionForm';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from '@/components/ui/dialog';
@@ -13,10 +16,54 @@ import { saveAs } from 'file-saver';
 interface AccountsBillRecordsTableProps {
   bills: (BillData & { _id: string })[];
   onUpdatePaymentStatus: (billId: string, status: 'Paid' | 'Unpaid') => void;
+  onFilterChange?: (startDate: string, endDate: string) => void;
 }
 
-export default function AccountsBillRecordsTable({ bills, onUpdatePaymentStatus }: AccountsBillRecordsTableProps) {
+export default function AccountsBillRecordsTable({ bills, onUpdatePaymentStatus, onFilterChange }: AccountsBillRecordsTableProps) {
   const [selectedBill, setSelectedBill] = useState<BillData | null>(null);
+  const [startDate, setStartDate] = useState<string>('');
+  const [endDate, setEndDate] = useState<string>('');
+  const [filteredBills, setFilteredBills] = useState<(BillData & { _id: string })[]>(bills);
+
+  useEffect(() => {
+    setFilteredBills(bills);
+  }, [bills]);
+
+  const handleDateFilterChange = () => {
+    if (onFilterChange) {
+      onFilterChange(startDate, endDate);
+    } else {
+      // Local filtering if no onFilterChange provided
+      if (!startDate && !endDate) {
+        setFilteredBills(bills);
+        return;
+      }
+      
+      const filtered = bills.filter(bill => {
+        const billDate = new Date(bill.dateTime);
+        const start = startDate ? new Date(startDate) : new Date(0);
+        const end = endDate ? new Date(endDate) : new Date(8640000000000000); // Max date
+        
+        // Set hours to 0 for start date and 23:59:59 for end date for inclusive comparison
+        start.setHours(0, 0, 0, 0);
+        end.setHours(23, 59, 59, 999);
+        
+        return billDate >= start && billDate <= end;
+      });
+      
+      setFilteredBills(filtered);
+    }
+  };
+
+  const clearFilters = () => {
+    setStartDate('');
+    setEndDate('');
+    if (onFilterChange) {
+      onFilterChange('', '');
+    } else {
+      setFilteredBills(bills);
+    }
+  };
 
   const handleDownloadBill = (bill: BillData) => {
     if (bill.billImage) {
@@ -82,7 +129,46 @@ export default function AccountsBillRecordsTable({ bills, onUpdatePaymentStatus 
 
   return (
     <div className="space-y-4">
-      <div className="flex justify-end">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div className="flex flex-col sm:flex-row gap-4 items-end">
+          <div className="flex flex-col gap-1.5">
+            <Label htmlFor="startDate">Start Date</Label>
+            <Input
+              id="startDate"
+              type="date"
+              value={startDate}
+              onChange={(e) => setStartDate(e.target.value)}
+              className="w-full sm:w-40"
+            />
+          </div>
+          <div className="flex flex-col gap-1.5">
+            <Label htmlFor="endDate">End Date</Label>
+            <Input
+              id="endDate"
+              type="date"
+              value={endDate}
+              onChange={(e) => setEndDate(e.target.value)}
+              className="w-full sm:w-40"
+            />
+          </div>
+          <div className="flex gap-2">
+            <Button
+              variant="outline"
+              className="border-[#59159d] text-[#59159d] hover:bg-[#59159d] hover:text-white"
+              onClick={handleDateFilterChange}
+            >
+              Apply Filter
+            </Button>
+            <Button
+              variant="outline"
+              className="border-gray-300 text-gray-500 hover:bg-gray-100"
+              onClick={clearFilters}
+            >
+              Clear
+            </Button>
+          </div>
+        </div>
+        <div className="flex justify-end">
         <Button
           variant="outline"
           className="flex items-center gap-2 border-[#59159d] text-[#59159d] hover:bg-[#59159d] hover:text-white"
@@ -92,6 +178,7 @@ export default function AccountsBillRecordsTable({ bills, onUpdatePaymentStatus 
           <FileSpreadsheet size={16} />
           Export to Excel
         </Button>
+        </div>
       </div>
       
       <div className="overflow-x-auto">
@@ -110,7 +197,7 @@ export default function AccountsBillRecordsTable({ bills, onUpdatePaymentStatus 
           </TableRow>
         </TableHeader>
         <TableBody>
-          {bills.map((bill) => (
+          {filteredBills.map((bill) => (
             <TableRow key={bill._id}>
               <TableCell>{bill.serialNumber}</TableCell>
               <TableCell>

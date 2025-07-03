@@ -65,20 +65,17 @@ export async function POST(req: Request) {
 
     // Handle Faculty registration
     if (role === 'Faculty') {
-      // Generate the new facultyId format
-      const lastUser = await db.collection('users').find({ role: 'Faculty' }).sort({ facultyId: -1 }).limit(1).toArray();
-      let newIdNumber = 1;
-      if (lastUser.length > 0 && lastUser[0].facultyId) {
-        const lastId = lastUser[0].facultyId;
-        const lastIdNumber = parseInt(lastId.split('-')[1]);
-        if (!isNaN(lastIdNumber)) {
-          newIdNumber = lastIdNumber + 1;
-        }
+      // Use the provided facultyId instead of generating a new one
+      // Validate that the facultyId follows the correct format
+      if (!facultyId.match(/^IINR-\d{3,}$/)) {
+        return NextResponse.json(
+          { error: 'Faculty ID must be in the format IINR-XXX' },
+          { status: 400 }
+        );
       }
-      const newFacultyId = `IINR-${String(newIdNumber).padStart(3, '0')}`;
 
       const userData = {
-        facultyId: newFacultyId,
+        facultyId, // Use the provided facultyId
         name,
         password: hashedPassword,
         role,

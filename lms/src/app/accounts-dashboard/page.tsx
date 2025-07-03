@@ -17,6 +17,8 @@ export default function AccountsDashboard() {
   const [accountsId, setAccountsId] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [bills, setBills] = useState<BillData[]>([]);
+  const [startDate, setStartDate] = useState<string>('');
+  const [endDate, setEndDate] = useState<string>('');
 
   useEffect(() => {
     // Check if user is authenticated as Accounts
@@ -45,20 +47,40 @@ export default function AccountsDashboard() {
     checkAuth();
   }, [router]);
 
-  useEffect(() => {
-    const fetchBills = async () => {
-      try {
-        const response = await fetch('/api/bills');
-        if (response.ok) {
-          const fetchedBills = await response.json();
-          setBills(fetchedBills);
-        }
-      } catch (error) {
-        console.error('Error fetching bills:', error);
+  const fetchBills = async (startDate: string = '', endDate: string = '') => {
+    try {
+      setIsLoading(true);
+      let url = '/api/bills';
+      
+      // Add date filters if provided
+      if (startDate || endDate) {
+        const params = new URLSearchParams();
+        if (startDate) params.append('startDate', startDate);
+        if (endDate) params.append('endDate', endDate);
+        url = `${url}?${params.toString()}`;
       }
-    };
+      
+      const response = await fetch(url);
+      if (response.ok) {
+        const fetchedBills = await response.json();
+        setBills(fetchedBills);
+      }
+    } catch (error) {
+      console.error('Error fetching bills:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  
+  useEffect(() => {
     fetchBills();
   }, []);
+  
+  const handleFilterChange = (newStartDate: string, newEndDate: string) => {
+    setStartDate(newStartDate);
+    setEndDate(newEndDate);
+    fetchBills(newStartDate, newEndDate);
+  };
 
   const handleLogout = async () => {
     try {
@@ -129,7 +151,8 @@ export default function AccountsDashboard() {
           <CardContent>
             <AccountsBillRecordsTable 
               bills={bills} 
-              onUpdatePaymentStatus={handleUpdatePaymentStatus} 
+              onUpdatePaymentStatus={handleUpdatePaymentStatus}
+              onFilterChange={handleFilterChange}
             />
           </CardContent>
         </Card>

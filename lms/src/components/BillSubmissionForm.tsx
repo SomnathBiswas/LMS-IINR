@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, ChangeEvent } from 'react';
+import { useState, useRef, useEffect, ChangeEvent } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -38,6 +38,14 @@ export default function BillSubmissionForm({ onSubmit, serialNumber }: BillSubmi
     overview: '',
     paymentStatus: 'Unpaid'
   });
+  
+  // Update billData when serialNumber prop changes
+  useEffect(() => {
+    setBillData(prev => ({
+      ...prev,
+      serialNumber // Update the serial number when the prop changes
+    }));
+  }, [serialNumber]);
 
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);

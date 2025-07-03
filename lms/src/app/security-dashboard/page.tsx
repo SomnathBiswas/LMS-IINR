@@ -84,7 +84,16 @@ export default function SecurityDashboard() {
   };
   
   const handleBillSubmit = (billData: BillData) => {
-    setBills(prevBills => [...prevBills, billData]);
+    // Make sure we're using the correct serial number from the form
+    const submittedBill = {
+      ...billData,
+      serialNumber: nextSerialNumber // Ensure we use the current nextSerialNumber
+    };
+    
+    // Add the new bill to the list
+    setBills(prevBills => [...prevBills, submittedBill]);
+    
+    // Increment the serial number for the next bill
     setNextSerialNumber(prevSerialNumber => {
       const newSerialNumber = prevSerialNumber + 1;
       localStorage.setItem('nextBillSerialNumber', newSerialNumber.toString());
