@@ -71,10 +71,24 @@ export default function ClassAttendance() {
 
     fetchClasses();
     
-    // Refresh data every 5 minutes
-    const interval = setInterval(fetchClasses, 5 * 60 * 1000);
+    // Refresh data more frequently (every 30 seconds) to catch status changes quickly
+    const interval = setInterval(fetchClasses, 30 * 1000);
     
-    return () => clearInterval(interval);
+    // Also listen for attendance status changes
+    const handleAttendanceUpdate = () => {
+      console.log('Attendance data updated, refreshing class attendance display');
+      fetchClasses();
+    };
+    
+    // Listen for both general attendance updates and specific missed class events
+    window.addEventListener('attendanceDataUpdated', handleAttendanceUpdate);
+    window.addEventListener('classMissed', handleAttendanceUpdate);
+    
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('attendanceDataUpdated', handleAttendanceUpdate);
+      window.removeEventListener('classMissed', handleAttendanceUpdate);
+    };
   }, []);
 
   const getTeacherInitial = (name: string) => {

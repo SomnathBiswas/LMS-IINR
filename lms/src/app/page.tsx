@@ -118,12 +118,42 @@ export default function HomePage() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date());
-    }, 1000);
-
+    }, 60000);
+    
     return () => clearInterval(timer);
   }, []);
 
-  // Fetch routine data for the current faculty user
+  useEffect(() => {
+    const handleClassMissed = (event: CustomEvent) => {
+      const { classId, className } = event.detail;
+      console.log(`Class missed event received: ${className} (${classId})`);
+      
+      // Immediately update the UI to reflect the missed class
+      setTodayClasses(prevClasses => 
+        prevClasses.map(cls => 
+          cls.id === classId ? { ...cls, status: 'missed' } : cls
+        )
+      );
+      
+      // Update class stats
+      setClassStats(prevStats => ({
+        ...prevStats,
+        missed: (prevStats.missed || 0) + 1
+      }));
+      
+      // Force a refresh of the data
+      window.dispatchEvent(new CustomEvent('requestAttendanceRefresh'));
+    };
+    
+    // Add event listener
+    window.addEventListener('classMissed', handleClassMissed as EventListener);
+    
+    // Clean up
+    return () => {
+      window.removeEventListener('classMissed', handleClassMissed as EventListener);
+    };
+  }, []);
+
   useEffect(() => {
     const handleForceRefresh = () => {
       console.log('Force refresh event received, refetching data...');
@@ -943,6 +973,25 @@ export default function HomePage() {
       // This state update will trigger the useEffect hook that re-calculates the schedule
       setAttendanceData(attendanceRecords);
       setLastAttendanceFetch(data.timestamp || Date.now());
+      
+      // Immediately update the UI for any missed classes
+      const missedClasses = data.classes.filter((cls: any) => cls.status === 'missed');
+      if (missedClasses.length > 0) {
+        console.log(`Found ${missedClasses.length} missed classes, updating UI immediately`);
+        // Update todayClasses to reflect missed status immediately
+        setTodayClasses(prevClasses => 
+          prevClasses.map(cls => {
+            const missedClass = missedClasses.find((mc: {id: string}) => mc.id === cls.id);
+            return missedClass ? { ...cls, status: 'missed' } : cls;
+          })
+        );
+        
+        // Also update class stats
+        setClassStats(prevStats => ({
+          ...prevStats,
+          missed: (prevStats.missed || 0) + missedClasses.length
+        }));
+      }
     }
   }, [user]); // This function now has stable dependencies
 const handleTakeClass = async (schedule: any) => {
