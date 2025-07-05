@@ -88,4 +88,5 @@ export const subjectsList = [
   'Proffessionalism',
   'CHN Lab +Requirement',
   'MS-II + LAB',
+  'MID Lab + Requirement',
 ];
