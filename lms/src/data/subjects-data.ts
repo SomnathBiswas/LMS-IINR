@@ -87,19 +87,5 @@ export const subjectsList = [
   'CHN + Lab',
   'Proffessionalism',
   'CHN Lab +Requirement',
-  
-  // Additional subjects
-  'Adult HNS I & II Lab + requirement',
-  'MS - I lab',
-  'FON Lab + Bandaging',
-  'Mat Nsh Lab',
-  'MHN Requirement',
-  'Adult HNS Lab+Requirement',
-  'Mid Lab + Requirement',
-  'Midwifery Lab + Requirement',
-  'First Aid + Bandaging',
-  'MS-II Lab',
-  'MSN Lab + Requirement',
-  'MSC- I',
-  'Com -II + Lab',
+  'MS-II + LAB',
 ];

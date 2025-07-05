@@ -75,17 +75,13 @@ export default function BillSubmissionForm({ onSubmit, serialNumber }: BillSubmi
     }
   };
 
-  // Universal file input trigger that works on all devices
   const triggerFileInput = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
   };
 
-  // Camera input trigger with device detection
   const triggerCameraInput = () => {
-    // On iOS devices, we'll use the file input without capture
-    // to allow the device to show its native camera/gallery picker
     if (cameraInputRef.current) {
       cameraInputRef.current.click();
     }
@@ -187,7 +183,6 @@ export default function BillSubmissionForm({ onSubmit, serialNumber }: BillSubmi
             >
               <Paperclip size={18} />
             </Button>
-            {/* Universal file input that works on all devices */}
             <input
               ref={fileInputRef}
               type="file"
@@ -195,11 +190,11 @@ export default function BillSubmissionForm({ onSubmit, serialNumber }: BillSubmi
               onChange={handleFileChange}
               className="hidden"
             />
-            {/* Camera input with optional capture attribute */}
             <input
               ref={cameraInputRef}
               type="file"
               accept="image/*"
+              capture="environment"
               onChange={handleFileChange}
               className="hidden"
             />
