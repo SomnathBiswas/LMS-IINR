@@ -94,7 +94,7 @@ export default function RoutineAnalysisPage() {
   ];
   
   // Room numbers
-  const roomNumbers = ['101', '102', '103', '201', '202', '203', '301', '302', '303'];
+  const roomNumbers = ['TBD', '102', '103', '201', '202', '203', '301', '302', '303'];
   
   // Function to add a new routine entry
   const addRoutineEntry = () => {
