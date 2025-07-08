@@ -53,7 +53,6 @@ export const subjectsList = [
   'COM Nsg-I',
   'Biophysics',
   'Int to NSG Admin',
-  'CHN-I',
   'Sociology + Ext',
   'Int to Forensic Nsg',
   'Midwifery',
@@ -90,4 +89,5 @@ export const subjectsList = [
   'MS-II + LAB',
   'Mid Lab + Requirement',
   'Adult HNS Lab+Requirement',
+  'Clinical Duty',
 ];
