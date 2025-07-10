@@ -90,4 +90,6 @@ export const subjectsList = [
   'Mid Lab + Requirement',
   'Adult HNS Lab+Requirement',
   'Clinical Duty',
+  'MSN-II',
+  'Nutrition & Dietetics',
 ];
