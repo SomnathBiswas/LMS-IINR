@@ -75,7 +75,35 @@ export default function EditRoutinePage() {
   const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   
   // Departments
-  const departments = ['BSc', 'GNM', 'PBBSc', 'MSc'];
+  const departments = [// BSc Nursing
+    'BSc (1st Sem)',
+    'BSc (2nd Sem)',
+    'BSc (3rd Sem)',
+    'BSc (4th Sem)',
+    'BSc (5th Sem)',
+    'BSc (6th Sem)',
+    'BSc (7th Sem)',
+    'BSc (8th Sem)',
+    
+    // GNM
+    'GNM (1st Sem)',
+    'GNM (2nd Sem)',
+    'GNM (3rd Sem)',
+    'GNM (4th Sem)',
+    'GNM (5th Sem)',
+    'GNM (6th Sem)',
+    
+    // PBBSc
+    'PBBSc (3rd Sem)',
+    'PBBSc (4th Sem)',
+    'PBBSc (5th Sem)',
+    'PBBSc (6th Sem)',
+    
+    // MSc Nursing
+    'MSc (1st Sem)',
+    'MSc (2nd Sem)',
+    'MSc (3rd Sem)',
+    'MSc (4th Sem)'];
   
   // Room numbers
   const roomNumbers = ['101', '102', '103', '201', '202', '203', '301', '302', '303'];
