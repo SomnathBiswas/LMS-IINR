@@ -88,7 +88,7 @@ export const subjectsList = [
   'CHN Lab +Requirement',
   'MS-II + LAB',
   'Mid Lab + Requirement',
-  'Adult HNS Lab+Requirement',
+  'Adult HNS I & II Lab + requirement',
   'Clinical Duty',
   'MSN-II',
   'Nutrition & Dietetics',
