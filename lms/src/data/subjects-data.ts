@@ -92,4 +92,5 @@ export const subjectsList = [
   'Clinical Duty',
   'MSN-II',
   'Nutrition & Dietetics',
+  'MSN-I',
 ];
