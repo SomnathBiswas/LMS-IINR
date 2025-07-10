@@ -93,4 +93,6 @@ export const subjectsList = [
   'MSN-II',
   'Nutrition & Dietetics',
   'MSN-I',
+  'Clinical Speciality',
+  'Speciality-II',
 ];
