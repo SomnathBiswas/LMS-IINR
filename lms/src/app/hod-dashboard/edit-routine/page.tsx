@@ -94,6 +94,8 @@ export default function EditRoutinePage() {
     'GNM (6th Sem)',
     
     // PBBSc
+    'PBBSc (1st Sem)',
+    'PBBSc (2nd Sem)',
     'PBBSc (3rd Sem)',
     'PBBSc (4th Sem)',
     'PBBSc (5th Sem)',
