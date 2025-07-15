@@ -40,16 +40,20 @@ export default function SecurityDashboard() {
             try {
               const response = await fetch('/api/bills');
               if (response.ok) {
-                const fetchedBills = await response.json();
+                const data = await response.json();
+                // Handle the new response format which includes bills and pagination
+                const fetchedBills = data.bills || [];
                 setBills(fetchedBills);
                 if (fetchedBills.length > 0) {
                   // Find the highest serial number in the existing bills
-                  const maxSerialNumber = Math.max(...fetchedBills.map((bill: BillData) => bill.serialNumber));
+                  const maxSerialNumber = Math.max(...fetchedBills.map((bill: BillData) => bill.serialNumber || 0));
                   // Set the next serial number to be one higher than the max
                   const newSerialNumber = maxSerialNumber + 1;
                   setNextSerialNumber(newSerialNumber);
                   localStorage.setItem('nextBillSerialNumber', newSerialNumber.toString());
                 }
+              } else {
+                console.error('Failed to fetch bills:', await response.text());
               }
             } catch (error) {
               console.error('Error fetching bills:', error);

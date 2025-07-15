@@ -62,8 +62,12 @@ export default function AccountsDashboard() {
       
       const response = await fetch(url);
       if (response.ok) {
-        const fetchedBills = await response.json();
+        const data = await response.json();
+        // Handle the new response format which includes bills and pagination
+        const fetchedBills = data.bills || [];
         setBills(fetchedBills);
+      } else {
+        console.error('Failed to fetch bills:', await response.text());
       }
     } catch (error) {
       console.error('Error fetching bills:', error);
