@@ -291,6 +291,15 @@ export default function SignInPage() {
               Sign Up
             </a>
           </p>
+          
+          <div className="flex justify-center mt-4">
+            <a
+              href="/"
+              className="text-sm text-[#59159d] hover:underline flex items-center"
+            >
+              ← Back to Home
+            </a>
+          </div>
         </form>
       </Card>
     </div>
