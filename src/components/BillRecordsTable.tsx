@@ -30,7 +30,7 @@ export default function BillRecordsTable({ bills }: BillRecordsTableProps) {
   // Function to export bills to CSV
   const exportToCSV = () => {
     // Create CSV headers
-    const headers = ['Serial Number', 'Owner Name', 'Institute', 'Date & Time', 'Amount', 'Overview', 'Payment Status'];
+    const headers = ['Serial Number', 'Owner Name', 'Institute Name', 'Date & Time', 'Amount', 'Overview', 'Payment Status'];
     
     // Convert bill data to CSV rows
     const csvRows = bills.map(bill => [
