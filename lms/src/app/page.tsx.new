@@ -1,0 +1,21 @@
+'use client';
+
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+
+// This page now just redirects to /home
+export default function RootPage() {
+  const router = useRouter();
+
+  useEffect(() => {
+    // Redirect to /home when this page loads
+    router.push('/home');
+  }, [router]);
+
+  // Return a minimal loading state while redirecting
+  return (
+    <div className="min-h-screen flex items-center justify-center">
+      <p className="text-gray-500">Redirecting to dashboard...</p>
+    </div>
+  );
+}
