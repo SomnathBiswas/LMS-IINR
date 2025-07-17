@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
+  <path d="M400 550C512.173 550 603 459.173 603 347C603 234.827 512.173 144 400 144C287.827 144 197 234.827 197 347C197 459.173 287.827 550 400 550Z" fill="#F3F4FF" />
+  <path d="M237 347H563" stroke="#D1D5FF" stroke-width="4" stroke-linecap="round" stroke-dasharray="12 12" />
+  <path d="M400 184V510" stroke="#D1D5FF" stroke-width="4" stroke-linecap="round" stroke-dasharray="12 12" />
+  <path d="M291 238L509 456" stroke="#D1D5FF" stroke-width="4" stroke-linecap="round" stroke-dasharray="12 12" />
+  <path d="M509 238L291 456" stroke="#D1D5FF" stroke-width="4" stroke-linecap="round" stroke-dasharray="12 12" />
+  <path d="M400 120C400 120 350 170 300 170C250 170 200 120 200 120C200 120 250 70 300 70C350 70 400 120 400 120Z" fill="#59159D" />
+  <path d="M600 120C600 120 550 170 500 170C450 170 400 120 400 120C400 120 450 70 500 70C550 70 600 120 600 120Z" fill="#7E3AD6" />
+  <rect x="250" y="250" width="300" height="200" rx="10" fill="white" stroke="#59159D" stroke-width="4" />
+  <path d="M280 280H520" stroke="#59159D" stroke-width="4" stroke-linecap="round" />
+  <path d="M280 320H520" stroke="#D1D5FF" stroke-width="4" stroke-linecap="round" />
+  <path d="M280 360H520" stroke="#D1D5FF" stroke-width="4" stroke-linecap="round" />
+  <path d="M280 400H520" stroke="#D1D5FF" stroke-width="4" stroke-linecap="round" />
+  <path d="M280 440H400" stroke="#D1D5FF" stroke-width="4" stroke-linecap="round" />
+  <circle cx="300" cy="280" r="10" fill="#7E3AD6" />
+  <circle cx="330" cy="280" r="10" fill="#59159D" />
+  <circle cx="360" cy="280" r="10" fill="#D1D5FF" />
+</svg>

@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
   "name": "lms",
-=======
-  "name": "lms-iinr",
->>>>>>> 9ba1102caa30ddb594354b415f41bf51403f2777
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -45,10 +41,6 @@
     "@eslint/eslintrc": "^3",
     "@shadcn/ui": "^0.0.4",
     "@tailwindcss/postcss": "^4",
-<<<<<<< HEAD
-=======
-    "@types/file-saver": "^2.0.7",
->>>>>>> 9ba1102caa30ddb594354b415f41bf51403f2777
     "@types/formidable": "^3.4.5",
     "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^20",
